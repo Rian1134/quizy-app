@@ -8,8 +8,8 @@ export default async function Home() {
   });
 
   return (
-    <main>
-      <h1>Daftar Kuis</h1>
+    <main className="flex flex-col p-4 m-4 card">
+      <h1 className="text-2xl font-bold mb-5">Daftar Kuis</h1>
 
       {quizzes.length === 0 && (
         <p>
@@ -20,19 +20,17 @@ export default async function Home() {
 
       <ul>
         {quizzes.map((quiz) => (
-          <li
-            key={quiz.id}
-          >
-            <h3>{quiz.title}</h3>
-            {quiz.description && (
-              <p>
-                {quiz.description}
-              </p>
-            )}
-            <p>
-              {quiz._count.questions} soal
-            </p>
-            <Link href={`/quiz/${quiz.id}`}>Mulai Kuis →</Link>
+          <li key={quiz.id} className="card">
+            <div className="card-header bg-green-500">
+              <h3 className="card-title text-white">{quiz.title}</h3>
+            </div>
+            <div className="card-body">
+              {quiz.description && <p className="mb-5">{quiz.description}</p>}
+              <p className="mb-5 text-2xl font-semibold">{quiz._count.questions} soal</p>
+              <Link href={`/quiz/${quiz.id}`} className="btn-primary">
+                Mulai Kuis
+              </Link>
+            </div>
           </li>
         ))}
       </ul>

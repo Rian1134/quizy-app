@@ -1,8 +1,14 @@
 import { prisma } from '@/libs/prisma';
 
-export async function GET(request, { params }) {
+interface RouteParams {
+  params: Promise<{ id: string }>;
+}
+
+export async function GET(request: Request, { params }: RouteParams) {
+  const { id } = await params;
+
   const quiz = await prisma.quiz.findUnique({
-    where: { id: Number(params.id) },
+    where: { id: Number(id) },
     include: {
       questions: {
         include: {

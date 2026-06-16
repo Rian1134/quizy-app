@@ -24,7 +24,7 @@ export default function Home() {
             </Link>
 
             <Link
-              href="#"
+              href="/"
               className="z-1 px-5 py-2 text-sm md:text-lg md:px-6 md:py-3 bg-linear-to-br from-indigo-600 to-indigo-400 
                 font-bold rounded-md drop-shadow-sm hover:bg-linear-t-r hover:from-white
                 hover:to-white hover:text-indigo-400 transition-colors duration-500"

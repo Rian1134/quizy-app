@@ -1,10 +1,20 @@
 import { prisma } from '@/libs/prisma';
 
-export async function POST(request, { params }) {
-  const { answers } = await request.json();
+interface RouteParams {
+  params: Promise<{ id: string }>;
+}
+
+interface SubmitBody {
+  answers: Record<number, number>;
+}
+
+export async function POST(request: Request, { params }: RouteParams) {
+  const { id } = await params;
+  const body: SubmitBody = await request.json();
+  const { answers } = body;
 
   const questions = await prisma.question.findMany({
-    where: { quizId: Number(params.id) },
+    where: { quizId: Number(id) },
     include: { options: true },
   });
 
@@ -18,7 +28,7 @@ export async function POST(request, { params }) {
 
   const attempt = await prisma.attempt.create({
     data: {
-      quizId: Number(params.id),
+      quizId: Number(id),
       score,
       total: questions.length,
     },

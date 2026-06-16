@@ -1,4 +1,21 @@
 import { prisma } from '@/libs/prisma';
+import { NextRequest } from 'next/server';
+
+interface OptionInput {
+  text: string;
+  isCorrect: boolean;
+}
+
+interface QuestionInput {
+  text: string;
+  options: OptionInput[];
+}
+
+interface CreateQuizBody {
+  title: string;
+  description?: string;
+  questions: QuestionInput[];
+}
 
 export async function GET() {
   const quizzes = await prisma.quiz.findMany({
@@ -8,8 +25,9 @@ export async function GET() {
   return Response.json(quizzes);
 }
 
-export async function POST(request) {
-  const { title, description, questions } = await request.json();
+export async function POST(request: NextRequest) {
+  const body: CreateQuizBody = await request.json();
+  const { title, description, questions } = body;
 
   const quiz = await prisma.quiz.create({
     data: {

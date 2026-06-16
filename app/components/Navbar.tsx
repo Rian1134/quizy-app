@@ -7,7 +7,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
     <header className="navbar">
-      <Link href="#">
+      <Link href="/">
         <h3 className="text-2xl font-bold hover:scale-110 transition-all">
           Quizy
         </h3>
@@ -15,19 +15,13 @@ const Navbar = () => {
 
       <ul className="hidden sm:flex items-center font-bold text-lg gap-5">
         <li>
-          <Link href="#" className="nav-link">
+          <Link href="/" className="nav-link">
             <i className="bi bi-house-fill me-2"></i>
             Home
           </Link>
         </li>
         <li>
-          <Link href="#" className="nav-link">
-            <i className="bi bi-question-circle-fill me-2"></i>
-            Quiz
-          </Link>
-        </li>
-        <li>
-          <Link href="#" className="nav-link">
+          <Link href="/create" className="nav-link">
             <i className="bi bi-plus-circle-fill me-2"></i>
             Create
           </Link>
@@ -38,17 +32,15 @@ const Navbar = () => {
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       ></i>
       <div
-        className={`nav-menu ${isMenuOpen ? "opacity-100" : "opacity-0"}`}
+        className={`nav-menu ${isMenuOpen ? "block" : "hidden"}`}
         style={{ transition: "transform 0.3s ease, opacity 0.3s ease" }}
       >
         <li className="nav-list">
           <Link href="/">Home</Link>
         </li>
+
         <li className="nav-list">
-          <Link href="#">Quiz</Link>
-        </li>
-        <li className="nav-list">
-          <Link href="#">Create</Link>
+          <Link href="/create">Create</Link>
         </li>
       </div>
     </header>
